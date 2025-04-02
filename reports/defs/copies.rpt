@@ -1,0 +1,115 @@
+.title "Copy Search"
+.category "Cataloging"
+.layout labels title="Imprimir Etiquetas"
+.column copyid hidden
+.column bibid hidden
+.column barcode_nmbr title="Cód. Barras" sort=barcode_nmbr
+.column callno title="Nº de chamada"
+.column author title=Autor
+.column title func=biblio_link title="Título" sort=title
+.column collection title="Coleção"
+.parameters
+.	string cdbar1 title="Codigo de barras 1:"
+.	string cdbar2 title="Codigo de barras 2:"
+.	string cdbar3 title="Codigo de barras 3:"
+.	string cdbar4 title="Codigo de barras 4:"
+.	string cdbar5 title="Codigo de barras 5:"
+.	string cdbar6 title="Codigo de barras 6:"
+.	string cdbar7 title="Codigo de barras 7:"
+.	string cdbar8 title="Codigo de barras 8:"
+.	string cdbar9 title="Codigo de barras 9:"
+.	string cdbar10 title="Codigo de barras 10:"
+.	string cdbar11 title="Codigo de barras 11:"
+.	string cdbar12 title="Codigo de barras 12:"
+.	string cdbar13 title="Codigo de barras 13:"
+.	string cdbar14 title="Codigo de barras 14:"
+.	string cdbar15 title="Codigo de barras 15:"
+.	string cdbar16 title="Codigo de barras 16:"
+.	string cdbar17 title="Codigo de barras 17:"
+.	string cdbar18 title="Codigo de barras 18:"
+.	string cdbar19 title="Codigo de barras 19:"
+.	string cdbar20 title="Codigo de barras 20:"
+.	order_by default=barcode_nmbr
+.	item barcode_nmbr title="Cod. de barras"
+.	end order_by
+.end parameters
+
+.sql
+	select c.*, concat_ws(' ', b.call_nmbr1, b.call_nmbr2, b.call_nmbr3) callno,
+		b.title, b.author, coll.description collection
+	from biblio_copy c, biblio b, collection_dm coll
+	where b.bibid=c.bibid and coll.code=b.collection_cd
+.	if_set barcode
+		and c.barcode_nmbr >= cast(%barcode% as UNSIGNED)
+.	end if_set
+.	if_set cdbar1
+		and c.barcode_nmbr in (%cdbar1%
+.	end if_set
+.	if_set cdbar2
+		,%cdbar2%
+.	end if_set
+.	if_set cdbar3
+		,%cdbar3%
+.	end if_set
+.	if_set cdbar3
+		,%cdbar3%
+.	end if_set
+.	if_set cdbar4
+		,%cdbar4%
+.	end if_set
+.	if_set cdbar5
+		,%cdbar5%
+.	end if_set
+.	if_set cdbar6
+		,%cdbar6%
+.	end if_set
+.	if_set cdbar7
+		,%cdbar7%
+.	end if_set
+.	if_set cdbar8
+		,%cdbar8%
+.	end if_set
+.	if_set cdbar9
+		,%cdbar9%
+.	end if_set
+.	if_set cdbar10
+		,%cdbar10%
+.	end if_set
+.	if_set cdbar11
+		,%cdbar11%
+.	end if_set
+.	if_set cdbar12
+		,%cdbar12%
+.	end if_set
+.	if_set cdbar13
+		,%cdbar13%
+.	end if_set
+.	if_set cdbar14
+		,%cdbar14%
+.	end if_set
+.	if_set cdbar15
+		,%cdbar15%
+.	end if_set
+.	if_set cdbar16
+		,%cdbar16%
+.	end if_set
+.	if_set cdbar17
+		,%cdbar17%
+.	end if_set
+.	if_set cdbar18
+		,%cdbar18%
+.	end if_set
+.	if_set cdbar19
+		,%cdbar19%
+.	end if_set
+.	if_set cdbar20
+		,%cdbar21%
+.	end if_set
+.	if_set cdbar1
+    )
+.	end if_set
+.	if_set newer
+		and c.create_dt >= %newer%
+.	end if_set
+.	order_by_expr
+.end sql

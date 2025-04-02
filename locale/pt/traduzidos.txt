@@ -1,0 +1,66 @@
+Arquivos modificados
+
+admin.php
+
+códigos adicionados:
+
+$trans["Max. hold length:"]			   = "\$text = 'Manter retirado no máximo';";
+$trans["days"]						   = "\$text = 'dias';";
+
+ok
+
+/--------------------------------------------------------------/
+
+cataloging.php
+
+ok
+
+/--------------------------------------------------------------/
+
+circulation.php
+
+ok
+
+/--------------------------------------------------------------/
+
+classes.php
+
+ok
+
+/--------------------------------------------------------------/
+
+home.php
+
+ok
+
+/--------------------------------------------------------------/
+
+navbars.php
+
+*códigos adicionados
+
+$trans["Member Types"]			   = "\$text = 'Tipos de Membro';";
+$trans["Member Fields"]			   = "\$text = 'Campos do Membro';";
+$trans["Checkout Privs"]		   = "\$text = 'Administrar Retiradas';";
+
+ok
+
+/--------------------------------------------------------------/
+
+opac.php
+
+ok
+
+/--------------------------------------------------------------/
+
+reports.php
+
+ok
+
+/--------------------------------------------------------------/
+
+shared.php
+
+ok
+
+/--------------------------------------------------------------/

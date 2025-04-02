@@ -1,0 +1,44 @@
+.title "Member Search"
+.category "Circulation"
+.layout mbr_cards_10up title="Imprimir Carteiras"
+.column mbrid hidden
+.column barcode_nmbr title="Cód. de Barras" sort=barcode_nmbr
+.column name title="Nome" func=member_link
+.column create_dt title="Data Cadastro" sort=create_dt
+.parameters
+.	string member1 title="Código de barras 1:"
+.	string member2 title="Código de barras 2:"
+.	string member3 title="Código de barras 3:"
+.	string member4 title="Código de barras 4:"
+.	string member5 title="Código de barras 5:"
+.	order_by default=barcode_nmbr
+.	item barcode_nmbr title="Cód. de barras"
+.	end order_by
+.end parameters
+
+.sql
+	SELECT mb.mbrid, mb.barcode_nmbr, mb.first_name as first_name, mb.last_name as last_name, concat(mb.first_name, ' ', mb.last_name) name, 
+	DATE_FORMAT(mb.create_dt, "%%d/%%m/%%Y") as create_dt, mbr_fi.data
+	FROM member mb
+	inner join member_fields mbr_fi on mb.mbrid = mbr_fi.mbrid
+	WHERE mbr_fi.code = 'DataNasc'
+.	if_set member1
+		and mb.barcode_nmbr in (%member1%
+.	end if_set
+.	if_set member2
+		,%member2%
+.	end if_set
+.	if_set member3
+		,%member3%
+.	end if_set
+.	if_set member4
+		,%member4%
+.	end if_set
+.	if_set member5
+		,%member5%
+.	end if_set
+.	if_set member1
+    )
+.	end if_set
+.	order_by_expr
+.end sql
