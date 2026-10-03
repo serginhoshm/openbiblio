@@ -1,0 +1,30 @@
+name: PHP
+
+on:
+  push:
+    branches:
+      - rewrite/php82
+  pull_request:
+    branches:
+      - main
+      - rewrite/php82
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        php-version: ['8.2', '8.3']
+    steps:
+      - uses: actions/checkout@v4
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php-version }}
+          extensions: pdo_mysql
+          coverage: none
+      - run: composer validate --no-check-publish
+      - run: composer install --no-interaction --prefer-dist
+      - run: composer test
+      - run: composer lint

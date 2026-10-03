@@ -1,0 +1,23 @@
+{
+  "name": "serginhoshm/openbiblio-modern",
+  "description": "Base moderna e isolada para a reescrita PHP do spin-off OpenBiblio",
+  "type": "project",
+  "license": "MIT",
+  "require": {
+    "php": "^8.2",
+    "ext-pdo": "*",
+    "ext-pdo_mysql": "*"
+  },
+  "autoload": {
+    "psr-4": {
+      "OpenBiblio\\Modern\\": "modern/src/"
+    }
+  },
+  "scripts": {
+    "test": "php modern/tests/run.php",
+    "lint": "find modern -name '*.php' -print0 | xargs -0 -n1 php -l"
+  },
+  "config": {
+    "sort-packages": true
+  }
+}
